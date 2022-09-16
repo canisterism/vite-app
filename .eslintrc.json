@@ -2,7 +2,8 @@
   "env": {
     "browser": true,
     "es2021": true,
-    "es2022": true
+    "es2022": true,
+    "jest/globals": true
   },
   "extends": [
     "eslint:recommended",
@@ -13,9 +14,24 @@
     "plugin:react/recommended",
     "plugin:react/jsx-runtime",
     "plugin:react-hooks/recommended",
+    "plugin:jest/recommended",
     "prettier"
   ],
-  "overrides": [],
+  "overrides": [
+    {
+      "files": ["*.tsx"],
+      "rules": { "react/prop-types": "off" }
+    },
+    {
+      "files": [
+        "src/**/__tests__/**/*.{js,jsx,ts,tsx}",
+        "src/**/*.{test,spec}.{js,jsx,ts,tsx}"
+      ],
+      "env": { "jest/globals": true },
+      "extends": ["plugin:jest/recommended", "plugin:jest/style"],
+      "plugins": ["jest"]
+    }
+  ],
   "parserOptions": {
     "ecmaVersion": "latest",
     "tsconfigRootDir": ".",
